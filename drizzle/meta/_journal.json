@@ -8,6 +8,13 @@
       "when": 1757094281455,
       "tag": "0000_next_anthem",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1757102535623,
+      "tag": "0001_exotic_puppet_master",
+      "breakpoints": true
     }
   ]
 }
