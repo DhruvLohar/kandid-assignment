@@ -6,6 +6,8 @@ import QueryProvider from "@/lib/providers";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/components/auth/auth-provider";
+import { getServerSession } from "@/lib/get-session";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,22 +24,26 @@ export const metadata: Metadata = {
   description: "A dashboard featuring leads and campaigns as part of an internship assignment",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <QueryProvider>
-            <SidebarProvider>
-              <AppSidebar />
-              <SidebarInset>
-                {children}
-              </SidebarInset>
-            </SidebarProvider>
+            <AuthProvider initialSession={session}>
+              <SidebarProvider>
+                <AppSidebar />
+                <SidebarInset>
+                  {children}
+                </SidebarInset>
+              </SidebarProvider>
+            </AuthProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>

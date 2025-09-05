@@ -32,6 +32,9 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
+import { authClient } from "@/lib/auth-client"
+import { auth } from "@/lib/auth"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
     user,
@@ -42,11 +45,23 @@ export function NavUser({
         avatar: string
     }
 }) {
+
+    const router = useRouter()
     const { isMobile } = useSidebar()
     const { theme, setTheme } = useTheme()
 
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark")
+    }
+
+    async function handleLogout() {
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.replace('/login');
+                }
+            }
+        });
     }
 
     return (
@@ -92,9 +107,10 @@ export function NavUser({
                             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                             {theme === "dark" ? "Light Mode" : "Dark Mode"}
                         </DropdownMenuItem>
+
                         <DropdownMenuSeparator />
-                        {/* Only show logout below */}
-                        <DropdownMenuItem>
+
+                        <DropdownMenuItem onClick={handleLogout}>
                             <LogOut />
                             Log out
                         </DropdownMenuItem>
