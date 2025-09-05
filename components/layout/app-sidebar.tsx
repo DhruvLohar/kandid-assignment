@@ -30,25 +30,20 @@ import { TeamSwitcher } from "./team-switcher"
 // This is sample data.
 const data = {
     user: {
-        name: "shadcn",
-        email: "m@example.com",
+        name: "Dhruv Lohar",
+        email: "dhruvlohar09@gmail.com",
         avatar: "/avatars/shadcn.jpg",
     },
     teams: [
         {
-            name: "Acme Inc",
+            name: "Kandid",
             logo: GalleryVerticalEnd,
-            plan: "Enterprise",
+            plan: "Personal",
         },
         {
-            name: "Acme Corp.",
+            name: "Marketing",
             logo: AudioWaveform,
-            plan: "Startup",
-        },
-        {
-            name: "Evil Corp.",
-            logo: Command,
-            plan: "Free",
+            plan: "Professional",
         },
     ],
     navMain: [

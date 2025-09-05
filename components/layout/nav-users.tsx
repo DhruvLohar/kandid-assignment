@@ -6,8 +6,11 @@ import {
     ChevronsUpDown,
     CreditCard,
     LogOut,
+    Moon,
     Sparkles,
+    Sun,
 } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import {
     Avatar,
@@ -40,6 +43,11 @@ export function NavUser({
     }
 }) {
     const { isMobile } = useSidebar()
+    const { theme, setTheme } = useTheme()
+
+    const toggleTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark")
+    }
 
     return (
         <SidebarMenu>
@@ -79,6 +87,11 @@ export function NavUser({
                                 </div>
                             </div>
                         </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={toggleTheme}>
+                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                            {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         {/* Only show logout below */}
                         <DropdownMenuItem>
